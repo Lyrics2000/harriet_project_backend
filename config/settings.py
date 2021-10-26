@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'authentification',
     'djoser',
     'mainapp',
+    'loan',
     'corsheaders',
     
 ]
