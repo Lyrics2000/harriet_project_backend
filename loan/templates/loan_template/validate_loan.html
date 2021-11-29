@@ -1,0 +1,94 @@
+{% if borrower %}
+{% if employment_details %}
+
+<table class="table table-striped" style="margin-top:20px;">
+   
+    <tbody>
+        <h3> User Credentials </h3>
+      <tr>
+        <th scope="row">Username</th>
+        <td>{{borrower.user_id.username}}</td>
+      </tr>
+      <tr>
+        <th scope="row">First Name</th>
+        <td>{{borrower.user_id.first_name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Last Name</th>
+        <td>{{borrower.user_id.last_name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Phone</th>
+        <td>{{borrower.user_id.phone}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td>{{borrower.user_id.email}}</td>
+      </tr>
+
+  
+     
+    </tbody>
+  </table>
+
+  <table class="table table-striped" style="margin-top:20px;">
+   
+    <tbody>
+        <h3> Farmer Assets </h3>
+      <tr>
+        <th scope="row">Bank/Mpesa statement</th>
+        <td><a style="color:blue;" href="{{borrower.statement_statement.url}}" >Go To </a></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <table class="table table-striped" style="margin-top:20px;">
+   
+    <tbody>
+        <h3> Employment Details </h3>
+      <tr>
+        <th scope="row">Employment Type</th>
+        <td>{{employment_details.employment_type}}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Employment Industry</th>
+        <td>{{employment_details.profession_type}}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Employment Description</th>
+        <td>{{employment_details.employment_description}}</td>
+      </tr>
+
+      <tr>
+        <th scope="row">Salary Range</th>
+        <td>{{employment_details.salary_range}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <form style="margin-left:10%" method="POST" action="{{loan.validate_user_loan_applicants}}">
+    {% csrf_token %}
+    <div class="form-group col-sm-6">
+        <label for="exampleInputEmail1">Release Date</label>
+        <input name="release_date_from_investor" type="date" class="form-control">
+        
+      </div>
+
+      <div class="form-group col-sm-6">
+        <label for="exampleInputEmail1">Disburd date</label>
+        <input name="disburd_date_to_borrower" type="date" class="form-control"  >
+        
+      </div>
+  
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" name="approve">
+      <label class="form-check-label" for="exampleCheck1">Approve</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% endif %}
+  {% endif %}

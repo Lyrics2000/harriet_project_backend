@@ -1,13 +1,24 @@
+import re
 from django.db.models.fields import BooleanField
+from django.db.models.fields.related import RECURSIVE_RELATIONSHIP_CONSTANT
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 from account.models import User
 from .models import (
+    InvestorFullFilmentProposal,
     LoanProposal,
     BorrowerAssets,
     EmploymentDetails
 )
+
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+
+from django.core.mail import EmailMessage
 
 
 
@@ -44,10 +55,13 @@ def loans(request):
     
     if farmer  == "Farmer":
         assets =  BorrowerAssets.objects.filter(user_id  =  user_obj)
+        approved =  InvestorFullFilmentProposal.objects.all()
+        
 
         context = {
             'all_loans' :  loan_proposal,
-            'borrower' :  assets
+            'borrower' :  assets,
+            'approved' :approved
         }
         return render(request,'loans.html',context)
 
@@ -144,11 +158,72 @@ def applied_loans(request):
     user_id =  request.user.id
     user_obj =  User.objects.get(id =  user_id)
     all_loanns =  BorrowerAssets.objects.filter(user_id =  user_obj)
+    approved = InvestorFullFilmentProposal.objects.all()
 
     context = {
-        'all_loans' : all_loanns
+        'all_loans' : all_loanns,
+        'approved' :  approved
     }
     return render(request,'applied_loans.html',context)
+
+@login_required(login_url="account:sign_in")
+def view_loan_applicants(request,pk):
+    loan =  LoanProposal.objects.get(id =  pk)
+    borrower =  BorrowerAssets.objects.all()
+
+    context = {
+        'loan': loan,
+        'borrower' :  borrower
+    }
+
+    return render(request,'view_all_applicants.html',context)
+
+
+@login_required(login_url="account:sign_in")
+def validate_user_loan(request,pk):
+    loan =  LoanProposal.objects.get(id =  pk)
+
+    borrower =  BorrowerAssets.objects.get(loan_proposal = loan)
+    employment_details = EmploymentDetails.objects.get(loan_proposal =  loan)
+
+
+    context = {
+        'loan': loan,
+        'borrower': borrower,
+        'employment_details':employment_details
+    }
+
+    if request.method ==  "POST":
+        approve = request.POST.get("approve")
+        release_date_from_investor =  request.POST.get("release_date_from_investor")
+      
+        disburd_date_to_borrower =  request.POST.get("disburd_date_to_borrower")
+        if approve == "on":
+            print(datetime.strptime(release_date_from_investor, '%Y-%m-%d'),"hgfdsdfghjk")
+            obj,created = InvestorFullFilmentProposal.objects.get_or_create(investor_proposal_id = loan,farmer_id = borrower.user_id)
+            obj.release_date_from_investor = release_date_from_investor
+            obj.disburd_date_to_borrower =  disburd_date_to_borrower
+            obj.accepted_declied =  True
+            obj.save()
+            current_site = get_current_site(request)
+            email_subject = 'Loan Approval'
+            user = borrower.user_id
+            message = render_to_string('loan_success.html', {
+            'user': user,
+            'domain': current_site.domain,
+            
+            
+            })
+            to_email = borrower.user_id.email
+            email = EmailMessage(email_subject, message, to=[to_email])
+            email.send()
+
+            return redirect("/")
+
+
+
+
+    return render(request,'validate_user_loan.html',context)
 
 
 

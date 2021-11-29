@@ -40,6 +40,18 @@ class LoanProposal(BaseModel):
             'pk': self.id
         })
 
+    def view_loan_applicants(self):
+        return reverse("loan:all_loan_applicants", kwargs={
+            'pk': self.id
+        })
+
+    def validate_user_loan_applicants(self):
+        return reverse("loan:validate_user_loan", kwargs={
+            'pk': self.id
+        })
+
+    
+
 
 
 class BorrowerAssets(BaseModel):
@@ -70,12 +82,12 @@ class EmploymentDetails(BaseModel):
 class InvestorFullFilmentProposal(BaseModel):
     investor_proposal_id = models.ForeignKey(LoanProposal,on_delete=models.CASCADE,null=True,blank=True)
     farmer_id = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
-    release_date_from_investor = models.DateTimeField()
-    disburd_date_to_borrower = models.DateTimeField()
+    release_date_from_investor = models.CharField(max_length=255,blank=True,null=True)
+    disburd_date_to_borrower = models.CharField(max_length=255,blank=True,null=True)
     accepted_declied =  models.BooleanField(default=False)
 
-    def __str__(self) -> str:
-        return str(self.investor_id)
+    def __str__(self):
+        return str(self.investor_proposal_id)
  
 
 
