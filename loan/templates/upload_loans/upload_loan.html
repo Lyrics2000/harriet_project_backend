@@ -1,0 +1,36 @@
+{% load static %}
+<section class="contact-section style-two">
+   <div class="auto-container">
+       <div class="sec-title" style="width:100%" >
+           <h2>Upload Loan</h2>
+         
+       </div>
+       <div class="row">
+           <div class="col-lg-7">
+               <form method="post" action="{% url 'loan:upload_loan' %}" class="contact-form">
+                  {% csrf_token %}
+                   <div class="row" style ="width: 100%;">
+                       <div class="col-md-6 form-group">
+                           <input type="text" name="loan_title" placeholder="Enter Title" required="">
+                       </div>
+
+                       <div class="col-md-6 form-group">
+                        <input style="padding:10px; border: 1px solid #000;" type="number" name="loan_amount" placeholder="Loan Amount" required="">
+                        </div>
+
+
+                        <div class="col-md-12 form-group-two">
+                            <textarea name="loan_requirements" placeholder="Loan requirements (usr <br> for making list )"></textarea>
+                        </div>
+
+                       <div class="col-md-12 form-group">
+                           <button class="theme-btn btn-style-one style-two" type="submit" name="submit-form"><span class="btn-title">UPLOAD LOAN</span></button>                                
+                       </div>
+                   
+                   </div>
+               </form>
+           </div>
+          
+       </div>
+   </div>
+</section>

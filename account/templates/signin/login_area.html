@@ -1,0 +1,38 @@
+{% load static %}
+<section class="contact-section style-two">
+   <div class="auto-container">
+       <div class="sec-title" style="width:100%" >
+           <h2>Sign In</h2>
+         
+       </div>
+       <div class="row">
+           <div class="col-lg-7">
+               <form method="post" action="{% url 'account:sign_in' %}" class="contact-form">
+                  {% csrf_token %}
+                   <div class="row" style ="width: 100%;">
+                       <div class="col-md-6 form-group">
+                           <input type="email" name="email" placeholder="Enter Email" required="">
+                       </div>
+
+                       <div class="col-md-6 form-group">
+                           <input style="padding: 10px;" type="password" name="password" placeholder="Enter Password" required="">
+                       </div>
+                     
+
+
+
+                       
+
+                       <div class="col-md-12 form-group">
+                           <button class="theme-btn btn-style-one style-two" type="submit" name="submit-form"><span class="btn-title">SIGN IN</span></button>                                
+                       </div>
+                       <div class="col-md-12 form-group">
+                        <a  href = "{% url 'account:sign_up' %}" style="color:white;" class="theme-btn btn-style-one style-two"  name="submit-form"><span class="btn-title">REGESTER</span></a>                                
+                    </div>
+                   </div>
+               </form>
+           </div>
+          
+       </div>
+   </div>
+</section>

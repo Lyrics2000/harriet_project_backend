@@ -1,0 +1,45 @@
+<form style="margin-left:20%;margin-right:20%;margin-top:20px;" method="POST" action="{{loan.get_apply_loan}}"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group col-md-6">
+      <label for="exampleInputEmail1">Bank/Mpesa statement</label>
+      <input type="file" class="form-control" name="statement" >
+     
+    </div>
+ 
+    <div class="form-group col-md-6">
+        <label for="inputState">Employement Type</label>
+        <select id="inputState" name="employment_type" class="form-control">
+          <option value="Self-Employed">Self-Employed</option>
+          <option value="Employed">Employed</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="exampleInputEmail1">Enter Employment Industry</label>
+        <input type="text" class="form-control" name="employment_industry" >
+       
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="exampleInputEmail1">Enter Employment Description</label>
+       
+        <textarea  class="form-control"   name="employment_description" rows="5" cols="50">
+         
+            </textarea>
+       
+      </div>
+
+       
+    <div class="form-group col-md-6">
+        <label for="inputState">Salary Range/Income Monthly</label>
+        <select id="inputState" name="salary_range" class="form-control">
+          <option value="Ksh : 10,000">Ksh : 10,000</option>
+          <option value="Ksh : 20,000">Ksh : 20,000</option>
+          <option value="Ksh : 30,000">Ksh : 30,000</option>
+          <option value="Ksh : 40,000">Ksh : 40,000</option>
+          <option value="Ksh : 50,000 and above">Ksh : 50,000 and above</option>
+        </select>
+      </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

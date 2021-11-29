@@ -7,7 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('mainapp.urls',namespace="mainapp"))
+    path('',include('mainapp.urls',namespace="mainapp")),
+    path('auth/',include('account.urls',namespace="account")),
+    path('upload_loan/',include('loan.urls',namespace="loan")),
+
 ]
 
 if settings.DEBUG:

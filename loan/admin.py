@@ -4,7 +4,7 @@ from .models import (
     BorrowerAssets,
     EmploymentDetails,
     LoanProposal,
-    LoanTicket,
+
     InvestorFullFilmentProposal
 )
 
@@ -13,5 +13,5 @@ admin.site.register(BorrowerExtraInfo)
 admin.site.register(BorrowerAssets)
 admin.site.register(EmploymentDetails)
 admin.site.register(LoanProposal)
-admin.site.register(LoanTicket)
+
 admin.site.register(InvestorFullFilmentProposal)

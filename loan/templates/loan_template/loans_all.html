@@ -1,0 +1,90 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Investor Name</th>
+        <th scope="col">Loan Title</th>
+        <th scope="col">Loan AMount</th>
+        <th scope="col">View Loan</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if all_loans %}
+        {% for all in all_loans  %}
+      <tr>
+        <th scope="row">{{all.user_id.id}}</th>
+        <td>{{all.user_id.username}}</td>
+        <td>{{all.loan_title}}</td>
+        <td>Ksh {{all.proposal_amount}} </td>
+        <td>
+          {% if request.user.is_authenticated %}
+          {% if request.user.type == 'Investor' %}
+
+            <form method="POST" action = "{% url 'loan:loan_details' %}">
+                {% csrf_token %}
+
+                <input type="hidden"  name="loan_id" value="{{all.id}}">
+             
+                <button type="submit" class="btn btn-primary">View Details</button>
+
+            </form>
+
+            {% endif %}
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+            {% if request.user.type == 'Farmer' %}
+            {% if borrower %}
+            {% for b in borrower %}
+            {% if b.loan_proposal.id == all.id  %}
+
+            <button type="button" class="btn btn-primary">Applied</button>
+
+            {% else %}
+
+            <form method="POST" action = "{% url 'loan:loan_details' %}">
+              {% csrf_token %}
+
+              <input type="hidden"  name="loan_id" value="{{all.id}}">
+           
+              <button type="submit" class="btn btn-primary">View Details</button>
+
+          </form>
+
+       
+            
+            {% endif %}
+
+            
+            {% endfor %}
+
+            {% else %}
+            <form method="POST" action = "{% url 'loan:loan_details' %}">
+              {% csrf_token %}
+  
+              <input type="hidden"  name="loan_id" value="{{all.id}}">
+           
+              <button type="submit" class="btn btn-primary">View Details</button>
+  
+          </form>
+  
+  
+
+          
+            
+            {% endif %}
+
+            {% endif %}
+            {% endif %}
+  
+
+        </td>
+       
+      </tr>
+      {% endfor %}
+      {% else %}
+      <h1>No Loans Available</h1>
+      {% endif %}
+     
+    </tbody>
+  </table>

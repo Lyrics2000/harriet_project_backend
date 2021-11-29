@@ -1,5 +1,5 @@
 from django.db import models
-from authentification.models import User
+from account.models import User
 import os
 import random
 
@@ -45,5 +45,47 @@ class MushroomCondition(BaseModel):
 
     def __str__(self):
         return self.condition
+
+
+class Sliderr(BaseModel):
+    header1 =  models.CharField(max_length=255)
+    body =  models.TextField()
+    image =  models.ImageField(upload_to = upload_image_path)
+
+    def __str__(self):
+        return self.header1
+
+class ImageOne(BaseModel):
+    image =  models.ImageField(upload_to = upload_image_path)
+
+
+class AboutUs(BaseModel):
+    header1 =  models.CharField(max_length=255)
+    body =  models.TextField()
+    image =  models.ImageField(upload_to = upload_image_path)
+    
+
+
+    def __str__(self):
+        return self.header1
+
+class OurSerices(BaseModel):
+    header1 =  models.CharField(max_length=255)
+    body =  models.TextField()
+    image =  models.ImageField(upload_to = upload_image_path)
+
+    def __str__(self):
+        return self.header1
+
+
+class Backrgoundd(BaseModel):
+    header1 =  models.CharField(max_length=255)
+    body =  models.TextField()
+    image = models.ImageField(upload_to = upload_image_path)
+
+    def __str__(self):
+        return self.header1
+
+
 
 

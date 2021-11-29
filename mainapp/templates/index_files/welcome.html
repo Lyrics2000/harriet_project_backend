@@ -1,0 +1,37 @@
+{% load static %}
+   <!-- Welcome Section -->
+   <section class="welcome-section pb-0">
+    <div class="auto-container">
+      <div class="sec-title text-center">
+          {% if about_us %}
+        <h2>{{about_us.header1}}</h2>
+        <div class="text">
+      {{about_us.body | safe}}
+        </div>
+        {% endif %}
+      </div>
+      <div class="row">
+
+        {% if our_services %}
+        {% for f in our_services %}
+        <div class="col-lg-4 welcome-block-one">
+          <div class="inner-box">
+            <div class="image">
+              <img src="{{f.image.url}}" alt="" />
+            </div>
+            <div class="content">
+              <h4>{{f.header1}}</h4>
+              <div class="text">
+               {{f.body | safe}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+        
+      </div>
+    </div>
+  </section>

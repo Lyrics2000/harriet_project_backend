@@ -1,0 +1,106 @@
+<table class="table table-bordered">
+   
+    <tbody>
+        {% if loan %}
+      <tr>
+    
+        <td>Investor Name</td>
+        <td>{{loan.user_id.username}}</td>
+      </tr>
+
+      <tr>
+    
+        <td>Title</td>
+        <td>{{loan.loan_title}}</td>
+      </tr>
+
+
+      <tr>
+    
+        <td>Amount</td>
+        <td>Ksh : {{loan.proposal_amount}}</td>
+      </tr>
+      <tr>
+    
+    <td>Loan Requirements</td>
+        <td><p>{{loan.loan_details | safe}} </p></td>
+      </tr>
+
+
+      {% if request.user.is_authenticated %}
+      {% if request.user.type == 'Investor' %}
+
+      <tr>
+    
+        <td>
+          
+            <a href="{{loan.get_absolute_url}}" type="button" class="btn btn-primary">Edit</a>
+        </td>
+    </tr>
+
+    {% endif %}
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    {% if request.user.type == 'Investor' %}
+
+    <tr>
+
+            <td>
+                <button type="button" class="btn btn-success">View Applocants</button>
+            </td>
+        </tr>
+
+    {% endif %}
+    {% endif %}
+    
+        {% if request.user.is_authenticated %}
+        {% if request.user.type == 'Investor' %}
+
+        <tr>
+   
+        <td>
+            <form method ="POST" action="{% url 'loan:delete_loan' %}" >
+
+                {% csrf_token %}
+
+                <input type="hidden"  name="loan_id" value="{{loan.id}}">
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+            </form>
+
+        </td>
+    </tr>
+
+    {% endif %}
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    {% if request.user.type == 'Farmer' %}
+
+    <tr>
+    
+      <td>
+        
+          <a href="{{loan.get_apply_loan}}" type="button" class="btn btn-primary">Apply Loan</a>
+      </td>
+
+    
+  </tr>
+
+  {% endif %}
+  {% endif %}
+
+
+        
+        
+     
+
+
+
+      {% endif %}
+    
+   
+    </tbody>
+  </table>

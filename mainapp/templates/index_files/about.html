@@ -1,0 +1,32 @@
+{% load static %}
+   <!-- About Section -->
+   <section
+   class="about-section"
+   style="background-image: url({% static 'assets/images/background/bg-1.jpg' %}%)"
+    >
+   <div class="auto-container">
+       {% if background %}
+     <div class="row">
+       <div class="col-lg-7">
+         <div class="sec-title">
+           <h2>
+            {{background.header1}}
+           </h2>
+           <div class="text">
+          {{background.body |  safe}}
+           </div>
+         </div>
+     
+       </div>
+       <div class="col-lg-5">
+         <div
+           class="image text-lg-right wow fadeInRight"
+           data-wow-delay="500ms"
+         >
+           <img src="{{background.image.url}}" alt="" />
+         </div>
+       </div>
+     </div>
+     {% endif %}
+   </div>
+ </section>

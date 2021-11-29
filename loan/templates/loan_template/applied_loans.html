@@ -1,0 +1,35 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Investor Name</th>
+        <th scope="col">Loan Title</th>
+        <th scope="col">Loan AMount</th>
+        <th scope="col">View Loan</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if all_loans %}
+        {% for all in all_loans  %}
+      <tr>
+        <th scope="row">{{all.user_id.id}}</th>
+        <td>{{all.loan_proposal.user_id.username}}</td>
+        <td>{{all.loan_proposal.loan_title}}</td>
+        <td>Ksh {{all.loan_proposal.proposal_amount}} </td>
+        <td>
+       
+            <button type="button" class="btn btn-primary">Applied</button>
+  
+        <td>
+          
+         
+        </td>
+       
+      </tr>
+      {% endfor %}
+      {% else %}
+      <h1>No Loans Available</h1>
+      {% endif %}
+     
+    </tbody>
+  </table>
