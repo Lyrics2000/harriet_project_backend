@@ -5,6 +5,71 @@
 {% include './index_files/banner.html' %}
 {% include './index_files/welcome.html' %}
 {% include './index_files/about.html' %}
+{% include './index_files/mushroom_prediction.html' %}
+
+<h1> check for stationarity </h1>
+{{ad_values}}
+<p> If p< 0.05 ; Data is stationary  </p>
+<p> if p>0.05; Data is not stationary </p>
+
+<h1> determining the order of our arima model  </h1>
+{{order}}
+
+<h1> Splitting dataset </h1>
+<p> we split the dataset into two groups <br> training and test dataset </p>
+<h3> train dataset closing price </h3>
+{{train}}
+<h3> test dataset closing price </h3>
+{{test}}
+
+<h1> Finally predicting the arma model </h1>
+<p> below are predicted prices from the table </p>
+{{model_summary}}
 
 
 {% endblock content %}
+
+{% block extra_scripts %}
+
+
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for n in prediction %} '{{n.mushroom_date_price}}', {% endfor %}],
+        datasets: [{
+            label: 'Mushrrom Prices',
+            data: [{% for n in prediction %} {{n.closing_price}}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+
+
+{% endblock extra_scripts %}

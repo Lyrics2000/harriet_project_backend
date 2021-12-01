@@ -38,6 +38,17 @@ class Mushroom(BaseModel):
     def __str__(self):
         return self.mushroom_name
 
+class MushroomPrediction(BaseModel):
+    mushroom_date_price =  models.DateField()
+    opening_price =  models.DecimalField(max_digits=20,decimal_places=2)
+    closing_price =  models.DecimalField(max_digits=20,decimal_places=2)
+    minimum_price =  models.DecimalField(max_digits=20,decimal_places=2)
+    maximum_price =  models.DecimalField(max_digits=20,decimal_places=2)
+    
+
+    def __str__(self):
+        return str(self.opening_price)
+
 
 class MushroomCondition(BaseModel):
     mushroom_id = models.ForeignKey(Mushroom,on_delete=models.CASCADE)

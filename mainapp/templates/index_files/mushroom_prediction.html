@@ -1,0 +1,33 @@
+
+<h1> Mushroom Prediction </h1>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Dates</th>
+        <th scope="col">Opening Price</th>
+        <th scope="col">Closing Price</th>
+        <th scope="col">Minimum Price</th>
+        <th scope="col">Maximum Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if prediction %}
+        {% for p in prediction  %}
+      <tr>
+        <th scope="row">Ksh : {{p.mushroom_date_price}}</th>
+        <td>Ksh : {{p.opening_price}}</td>
+        <td> Ksh :{{p.closing_price}}</td>
+        <td>Ksh :{{p.minimum_price}}</td>
+        <td>Ksh :{{p.maximum_price}}</td>
+      </tr>
+      {% endfor %}
+
+      {% endif %}
+     
+      
+    </tbody>
+  </table>
+  
+  <h1> the graph used to check trend from arma model</h1>
+  <canvas id="myChart" width="400" height="100"></canvas>
+  

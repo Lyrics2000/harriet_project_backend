@@ -6,7 +6,8 @@ Sliderr,
 ImageOne,
 AboutUs,
 OurSerices,
-Backrgoundd)
+Backrgoundd,
+MushroomPrediction)
 
 # Register your models here.
 admin.site.register(Counties)
@@ -17,3 +18,4 @@ admin.site.register(ImageOne)
 admin.site.register(AboutUs)
 admin.site.register(OurSerices)
 admin.site.register(Backrgoundd)
+admin.site.register(MushroomPrediction)

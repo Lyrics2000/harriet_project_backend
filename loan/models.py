@@ -79,6 +79,10 @@ class EmploymentDetails(BaseModel):
 
 
 
+
+
+
+
 class InvestorFullFilmentProposal(BaseModel):
     investor_proposal_id = models.ForeignKey(LoanProposal,on_delete=models.CASCADE,null=True,blank=True)
     farmer_id = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
