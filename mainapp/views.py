@@ -69,7 +69,7 @@ def index(request):
     start=len(train)
     end=len(train)+len(test)-1
     preddd=model.predict(start=start,end=end,typ='levels')
-    print(preddd)
+    print("predicted price",str(preddd))
     # pred.plot(legend=True)
     # test['AvgTemp'].plot(legend=True)
     
